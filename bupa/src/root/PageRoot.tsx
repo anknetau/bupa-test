@@ -1,10 +1,10 @@
-import BookOwners from "../components/BookOwners";
 import { Provider } from "../components/ui/provider";
+import { BookOwnersPage } from "../pages/BookOwnersPage";
 
 export const PageRoot = () => {
   return (
     <Provider>
-      <BookOwners />
+      <BookOwnersPage />
     </Provider>
   );
 };
