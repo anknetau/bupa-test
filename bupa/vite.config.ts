@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import path from "path";
+import fs from "fs";
 
 export default defineConfig({
   plugins: [
@@ -7,14 +9,15 @@ export default defineConfig({
     {
       name: "aaa",
       configureServer(server) {
-        server.middlewares.use("/api/test", (_, res) => {
-          res.setHeader("Content-Type", "application/json");
-          res.end(
-            JSON.stringify({
-              id: "1",
-              name: "Jane",
-            }),
+        server.middlewares.use("/api/v1/bookowners", (_, res) => {
+          const filePath = path.resolve(
+            __dirname,
+            "src/api/sample_response.json",
           );
+          const data = fs.readFileSync(filePath, "utf-8");
+
+          res.setHeader("Content-Type", "application/json");
+          res.end(data);
         });
       },
     },
