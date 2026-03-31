@@ -22,7 +22,7 @@ After that, run `npm install`.
 
 ## Available scripts
 
-`npm run all-checks`: will run all typesystem checks, tests and eslint, etc.
+`npm run all-checks`: will run all typesystem checks, unit tests, vulnerability, eslint, etc.
 
 `npm run test`: will just run the tests
 
