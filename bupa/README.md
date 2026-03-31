@@ -28,6 +28,12 @@ After that, run `npm install`.
 
 `npm run lint`: to lint the code.
 
+## Links
+
+Development server lives at http://localhost:5173
+
+Mock API lives at http://localhost:5173/api/v1/bookowners
+
 ---
 
 Enjoy, and let me know if you have any issues!
