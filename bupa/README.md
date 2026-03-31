@@ -12,7 +12,7 @@ By Andy Kievsky
 
 At this point, you may need to `nvm install` if the version required is not installed yet.
 
-### Otherwise, just install the node as per .nvmrc and `cd` into `bupa`
+### Otherwise, just install Node v24.14.1 (as per .nvmrc) and `cd` into `bupa`
 
 After that, run `npm install`.
 
