@@ -1,5 +1,4 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {} from "../api";
 import type { BookOwner } from "../api/types";
 
 const Spinner = () => {
