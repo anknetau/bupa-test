@@ -14,11 +14,21 @@ At this point, you may need to `nvm install` if the version required is not inst
 
 ### Otherwise, just install the node as per .nvmrc and `cd` into `bupa`
 
+After that, run `npm install`.
+
 ## Running a development server
 
-`npm install`
-
 `npm run dev`
+
+## Available scripts
+
+`npm run all-checks`: will run all typesystem checks, tests and eslint, etc.
+
+`npm run test`: will just run the tests
+
+`npm run lint`: to lint the code.
+
+---
 
 Enjoy, and let me know if you have any issues!
 
