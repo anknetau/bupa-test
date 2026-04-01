@@ -1,6 +1,5 @@
 import { Links, Meta, Scripts, ScrollRestoration } from "react-router";
 
-import { Main } from "@/components/chakra_base.tsx";
 import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "@/components/layout/Header.tsx";
 import { Footer } from "@/components/layout/Footer.tsx";
@@ -23,7 +22,7 @@ export function RootHtml({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ChakraAppProvider>
-          <Main>
+          <main>
             <Flex direction="column">
               <Box flex="1">
                 <Header />
@@ -33,7 +32,7 @@ export function RootHtml({ children }: { children: React.ReactNode }) {
                 <Footer />
               </Box>
             </Flex>
-          </Main>
+          </main>
         </ChakraAppProvider>
 
         <ScrollRestoration />
