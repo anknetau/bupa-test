@@ -6,10 +6,9 @@ import {
   Flex,
   Link,
   Separator,
-  Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { palette, semanticColour } from "../palette";
+import { semanticColour } from "../palette";
 
 /* eslint-disable react-refresh/only-export-components */
 export function meta() {
