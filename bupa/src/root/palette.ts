@@ -2,6 +2,8 @@
 export const palette = {
   bupaBlue: "#0079c8",
   white: "white",
+  grey: "grey",
+  darkGrey: "rgb(.2,.2,.2)",
 };
 
 export const semanticColour = {
@@ -10,4 +12,6 @@ export const semanticColour = {
   spinnerColour: palette.bupaBlue,
   buttonBackground: palette.bupaBlue,
   link: palette.bupaBlue,
+  groupdBooksBorder: palette.grey,
+  shadow: palette.darkGrey,
 };

@@ -1,8 +1,13 @@
 import GroupedBooks from "@/components/GroupedBooks";
-import { Center, Container, Flex, Link, Separator } from "@chakra-ui/react";
-import { useState } from "react";
-import { semanticColour } from "../palette";
+import { Alert, Container, Flex, Separator, Spinner } from "@chakra-ui/react";
 import { GetBooksButton } from "../../components/ui/GetBooksButton";
+import { HardcoverOnlyLink } from "./HardcoverOnlyLink";
+import { semanticColour } from "../palette";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import type { BookOwner } from "@/api/types";
+import { fetchBookOwners } from "@/api/api";
+import { useBookOwnerStore } from "@/store/bookOwnerStore";
+import { ErrorAlert } from "@/components/ui/ErrorAlert";
 
 /* eslint-disable react-refresh/only-export-components */
 export function meta() {
@@ -10,31 +15,54 @@ export function meta() {
 }
 
 const Home = () => {
-  const [hardcoverOnly, setHardcoverOnly] = useState(false);
+  const store = useBookOwnerStore();
+  const { isFetching, error } = useSuspenseQuery<BookOwner[]>({
+    queryKey: [],
+    queryFn: async () => {
+      const result = await fetchBookOwners();
+      store.update(result);
+      return result;
+    },
+  });
+
+  return (
+    <Container width={{ base: "90%", md: "60%" }}>
+      {error ? (
+        <ErrorAlert error={error.message} />
+      ) : isFetching ? (
+        <Spinner size="lg" color={semanticColour.spinnerColour} />
+      ) : (
+        <Content />
+      )}
+    </Container>
+  );
+};
+
+const Content = () => {
   return (
     <>
-      <Container width="80%">
-        <Flex alignItems="flex-start" p="2" justify="center" gap="4" mt="8">
-          <Center verticalAlign="top" flex="1">
-            <GroupedBooks ownedBy="adults" hardcoverOnly={hardcoverOnly} />
-          </Center>
-          <Center verticalAlign="top" flex="1">
-            <GroupedBooks ownedBy="children" hardcoverOnly={hardcoverOnly} />
-          </Center>
-        </Flex>
-        <Separator color="red" size="lg" m="4" />
-        <Flex justify="flex-end" p="2" gap="4">
-          <Link
-            onClick={() => setHardcoverOnly((value) => !value)}
-            textDecoration="underline"
-            fontWeight="bold"
-            color={semanticColour.link}
-          >
-            {hardcoverOnly ? "All" : "Hardcover Only"}
-          </Link>
-          <GetBooksButton />
-        </Flex>
-      </Container>
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        alignItems="flex-start"
+        p="2"
+        justify="center"
+        gap="4"
+        mt="8"
+      >
+        <GroupedBooks ownedBy="adults" />
+        <GroupedBooks ownedBy="children" />
+      </Flex>
+      <Separator size="lg" m="4" />
+      <Flex
+        direction={{ base: "column-reverse", md: "row" }}
+        justify="flex-end"
+        align="center"
+        p="2"
+        gap="4"
+      >
+        <HardcoverOnlyLink />
+        <GetBooksButton />
+      </Flex>
     </>
   );
 };

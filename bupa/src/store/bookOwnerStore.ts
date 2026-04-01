@@ -1,10 +1,29 @@
 import { create } from "zustand";
 import type { Book, BookOwner } from "@/api/types";
 
-export const useBookOwnerStore = create((set) => ({
-  bookOwnerList: [] as BookOwner[],
-  update: (newList: BookOwner[]) => set({ bookOwnerList: newList }),
-}));
+interface BookOwnerState {
+  bookOwnerList: BookOwner[];
+  update: (newList: BookOwner[]) => void;
+  hardcoverOnly: boolean;
+  toggleHardcoverOnly: () => void;
+  resetHardcoverOnly: () => void;
+}
+
+export const useBookOwnerStore = create<BookOwnerState>((set) => {
+  return {
+    bookOwnerList: [],
+    update: (newList: BookOwner[]) => set({ bookOwnerList: newList }),
+    hardcoverOnly: false,
+    toggleHardcoverOnly: () =>
+      set((state) => ({
+        hardcoverOnly: !state.hardcoverOnly,
+      })),
+    resetHardcoverOnly: () =>
+      set(() => ({
+        hardcoverOnly: false,
+      })),
+  };
+});
 
 // Assumption: comparisons are based on whatever comes first in the name, with a simple
 // localeCompare.

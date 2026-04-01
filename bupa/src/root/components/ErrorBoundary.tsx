@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from "react";
 import type { Route } from "../+types/root";
 import { isRouteErrorResponse } from "react-router";
+import { ErrorAlert } from "../../components/ui/ErrorAlert";
 
 interface Props {
   children: ReactNode;
@@ -23,25 +24,14 @@ export default class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.error) {
-      console.log(this.state);
-      return (
-        <div className="border border-red-700 rounded p-1">
-          <p className="text-xl">Error: {this.state.error.message}</p>
-          <button
-            className="bg-orange-400 rounded-xl p-1 text-black cursor-pointer"
-            onClick={this.handleRetry}
-          >
-            Retry
-          </button>
-        </div>
-      );
+      return <ErrorAlert error={this.state.error.message} />;
     }
 
     return this.props.children;
   }
 }
 
-export function ErrorBoundaryForPage({ error }: Route.ErrorBoundaryProps) {
+export function PageErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;

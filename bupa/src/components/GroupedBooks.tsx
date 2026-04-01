@@ -1,57 +1,52 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import type { BookOwner } from "../api/types";
-import { fetchBookOwners } from "../api/api";
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { semanticColour } from "@/root/palette";
 import { Center, Heading } from "@chakra-ui/react";
 import {
   bookListSortedByTitle,
   uniqueBooks,
   uniqueStrings,
+  useBookOwnerStore,
 } from "@/store/bookOwnerStore";
+import type { BookOwner } from "@/api/types";
+
+type AdultsOrChilden = "adults" | "children";
 
 type GroupedBooksProps = {
-  ownedBy?: "adults" | "children";
+  ownedBy?: AdultsOrChilden;
   hardcoverOnly?: boolean;
 };
 
-const GroupedBooks = ({
-  ownedBy = "adults",
-  hardcoverOnly = false,
-}: GroupedBooksProps) => {
-  const {
-    data: bookOwners,
-    isFetching,
-    error,
-  } = useSuspenseQuery<BookOwner[]>({
-    queryKey: [],
-    queryFn: fetchBookOwners,
-  });
-
-  let owners = bookOwners;
-
+const filterOwnedList = (
+  bookOwnerList: BookOwner[],
+  ownedBy: AdultsOrChilden,
+) => {
   switch (ownedBy) {
     case "adults":
-      owners = owners.filter((owner) => owner.age > 17);
-      break;
+      return bookOwnerList.filter((owner) => owner.age > 17);
     case "children":
-      owners = owners.filter((owner) => owner.age <= 17);
-      break;
+      return bookOwnerList.filter((owner) => owner.age <= 17);
   }
+};
 
-  let books = bookListSortedByTitle(uniqueBooks(owners));
+const GroupedBooks = ({ ownedBy = "adults" }: GroupedBooksProps) => {
+  const { bookOwnerList, hardcoverOnly } = useBookOwnerStore();
+  const filteredBookOwnerList = filterOwnedList(bookOwnerList, ownedBy);
+
+  let books = bookListSortedByTitle(uniqueBooks(filteredBookOwnerList));
   if (hardcoverOnly) {
     books = books.filter((book) => book.type == "Hardcover");
   }
   const bookNames = uniqueStrings(books.map((book) => book.name));
 
-  if (error) return <div>An error has occurred: {error.message}</div>;
-
   return (
     <Center
       width="100%"
-      // borderWidth="medium"
-      // borderColor={semanticColour.headerBackground}
+      flex="1"
+      p="2"
+      borderColor={semanticColour.groupdBooksBorder}
+      borderWidth={{ base: "medium", md: 0 }}
+      borderRadius={{ base: "10px", md: 0 }}
+      boxShadow={{ base: `6px 6px 0 ${semanticColour.shadow}`, md: "0 0 0" }}
     >
       <Flex direction="column" flex="1">
         <Center
@@ -64,9 +59,6 @@ const GroupedBooks = ({
             Books owned by {ownedBy == "adults" ? "Adults" : "Children"}
           </Heading>
         </Center>
-        {isFetching ? (
-          <Spinner size="lg" color={semanticColour.spinnerColour} />
-        ) : null}
         {bookNames.map((bookName) => (
           <div key={bookName}>{bookName}</div>
         ))}

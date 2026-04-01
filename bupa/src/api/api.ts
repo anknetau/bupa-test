@@ -12,8 +12,7 @@ export const defaultQueryFn = async ({
 }: {
   queryKey: readonly unknown[];
 }) => {
-  console.log(`${BASE_URL_PROD}${queryKey[0]}`);
-  const data = await fetch(`${BASE_URL_PROD}${queryKey[0]}`);
+  const data = await fetch(`${BASE_URL_LOCAL}${queryKey[0]}`);
   return await data.json();
 };
 
