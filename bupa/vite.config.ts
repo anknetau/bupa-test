@@ -1,3 +1,4 @@
+import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path, { resolve } from "path";
@@ -6,6 +7,7 @@ import fs from "fs";
 export default defineConfig({
   plugins: [
     react(),
+    reactRouter(),
     {
       name: "simple mock server",
       configureServer(server) {
