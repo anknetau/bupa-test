@@ -1,5 +1,5 @@
-import { Provider } from "../components/ui/provider";
-import { BookOwnersPage } from "../pages/BookOwnersPage";
+import { Provider } from "@/components/ui/provider";
+import { BookOwnersPage } from "@/pages/BookOwnersPage";
 
 export const PageRoot = () => {
   return (
