@@ -45,7 +45,7 @@ const GroupedBooks = ({
   }
   const bookNames = uniqueStrings(books.map((book) => book.name));
 
-  if (error) return <div>"An error has occurred: " + error.message</div>;
+  if (error) return <div>An error has occurred: {error.message}</div>;
 
   return (
     <Center
