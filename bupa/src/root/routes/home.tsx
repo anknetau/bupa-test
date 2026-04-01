@@ -1,14 +1,8 @@
 import GroupedBooks from "@/components/GroupedBooks";
-import {
-  Button,
-  Center,
-  Container,
-  Flex,
-  Link,
-  Separator,
-} from "@chakra-ui/react";
+import { Center, Container, Flex, Link, Separator } from "@chakra-ui/react";
 import { useState } from "react";
 import { semanticColour } from "../palette";
+import { GetBooksButton } from "../../components/ui/GetBooksButton";
 
 /* eslint-disable react-refresh/only-export-components */
 export function meta() {
@@ -38,12 +32,7 @@ const Home = () => {
           >
             {hardcoverOnly ? "All" : "Hardcover Only"}
           </Link>
-          <Button
-            bgColor={semanticColour.buttonBackground}
-            onClick={() => console.log("Coming soon!")}
-          >
-            Get Books
-          </Button>
+          <GetBooksButton />
         </Flex>
       </Container>
     </>
