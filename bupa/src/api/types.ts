@@ -8,7 +8,7 @@ export const BookSchema = z.object({
 });
 
 export const BookOwnerSchema = z.object({
-  // Assumption: that these are never absent
+  // Assumption: that these are never absent, and that responses like "NAME" and "AGE" are incorrect.
   name: z.string(),
   age: z.number(),
   books: z.array(BookSchema),

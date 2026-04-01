@@ -37,16 +37,3 @@ export const queryClient = new QueryClient({
     },
   },
 });
-
-// ----
-
-// import { BookOwnerListSchema } from "./api/types";
-
-// async function fetchUser(): Promise<User> {
-//   const res = await fetch("/api/user");
-//   const json = await res.json();
-
-//   return UserSchema.parse(json); // runtime validation
-// }
-
-// TODO: Too many requests
