@@ -38,4 +38,4 @@ Mock API lives at http://localhost:5173/api/v1/bookowners
 
 Enjoy, and let me know if you have any issues!
 
-~ Andy - `ank@ank.net.au`
+~ Andy
