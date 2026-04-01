@@ -3,6 +3,7 @@ import { BookOwnerListSchema, type BookOwner } from "./types";
 import { ZodError } from "zod";
 
 export const BASE_URL_LOCAL = "http://localhost:5173";
+// Assumption: that the Access-Control-Allow-Origin will be set correctly for the prod domain
 export const BASE_URL_PROD = "https://digitalcodingtest.bupa.com.au";
 
 export const PATH_BOOK_OWNERS = "/api/v1/bookowners";

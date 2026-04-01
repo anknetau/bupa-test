@@ -1,6 +1,6 @@
 import { Link } from "@chakra-ui/react";
-import { semanticColour } from "../palette";
 import { useBookOwnerStore } from "@/store/bookOwnerStore";
+import { semanticColour } from "@/root/palette";
 
 export const HardcoverOnlyLink = () => {
   const { hardcoverOnly, toggleHardcoverOnly } = useBookOwnerStore();
