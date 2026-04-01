@@ -5,10 +5,10 @@ import { Box, Flex } from "@chakra-ui/react";
 import { Header } from "@/components/layout/Header.tsx";
 import { Footer } from "@/components/layout/Footer.tsx";
 
-import { ChakraAppProvider } from "@/components/ui/provider";
+import { ChakraAppProvider } from "@/components/ui/ChakraAppProvider";
 
 export function RootHtml({ children }: { children: React.ReactNode }) {
-  const initialColorMode = "dark";
+  const initialColorMode = "light";
   return (
     <html
       lang="en"
@@ -22,10 +22,9 @@ export function RootHtml({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <p>Bupa Root HTML</p>
         <ChakraAppProvider>
           <Main>
-            <Flex direction="column" minH="100vh">
+            <Flex direction="column">
               <Box flex="1">
                 <Header />
                 {children}
