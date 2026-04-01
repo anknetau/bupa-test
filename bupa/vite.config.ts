@@ -1,13 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
+import path, { resolve } from "path";
 import fs from "fs";
 
 export default defineConfig({
   plugins: [
     react(),
     {
-      name: "aaa",
+      name: "simple mock server",
       configureServer(server) {
         server.middlewares.use("/api/v1/bookowners", (_, res) => {
           const filePath = path.resolve(
@@ -22,4 +22,9 @@ export default defineConfig({
       },
     },
   ],
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+    },
+  },
 });
